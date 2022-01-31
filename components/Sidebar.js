@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 
@@ -5,6 +6,7 @@ import { navItems } from '../static/navItems'
 import CoinbaseLogo from '../assets/cb-logo.png'
 
 const Sidebar = () => {
+  const [activeIcon, setActiveIcon] = useState([navItems[0].title])
   return (
     <Wrapper>
       <LogoContainer>
@@ -14,8 +16,8 @@ const Sidebar = () => {
       </LogoContainer>
       <NavItemsContainer>
         {navItems.map((item, index) => (
-          <NavItem key={index}>
-            <NavIcon>
+          <NavItem key={index} onClick={() => setActiveIcon(item.title)}>
+            <NavIcon style={{ color: item.title === activeIcon && '#3773f5'}}>
               {item.icon}
             </NavIcon>
             <NavTitle>{item.title}</NavTitle>
@@ -49,7 +51,7 @@ const NavItemsContainer = styled.div`
   margin-top: 3rem;
 
   &:hover {
-    cursour: pointer;
+    cursor: pointer;
   }
 `
 
